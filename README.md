@@ -87,4 +87,8 @@ head -n 2 inventaire.csv
 python3 -c "import csv; rows=list(csv.DictReader(open('inventaire.csv', encoding='utf-8'))); print(len(rows), rows[0]['nom'])"
 ```
 
-Licenses listed here belong to the inventoried projects, not to this dataset. Add your own dataset license if you need one.
+## License
+
+This dataset is licensed under [CC BY 4.0](LICENSE). You can reuse and adapt it, including commercially, as long as you give credit.
+
+Project licenses listed in the CSV belong to those projects, not to this inventory.
