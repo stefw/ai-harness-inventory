@@ -4,7 +4,7 @@ Coding harness,Boucle modèle-outils-contexte-permissions destinée au code.,"Cl
 Agent runtime,"Infrastructure programmable pour composer outils, mémoire et boucles.","DeepSeek Harness, OpenHands, OpenHarness",Oui,Peut aussi livrer un agent prêt à l'emploi
 Agentic IDE,Éditeur intégrant un harness et des outils IDE.,"Cursor, Kiro, TRAE, Windsurf",Oui,Le harness peut être invisible ou propriétaire
 Cloud coding agent,"Agent exécuté en VM/conteneur distant, souvent asynchrone.","Devin, Jules, Codex Cloud, Copilot Cloud Agent",Oui,Délégation et PR
-General-purpose agent,Agent pouvant coder mais aussi agir sur le web ou des applications.,"Hermes, Grok Bot, Goose, OpenClaw, OpenHuman","Oui, au sens large",Pas exclusivement orienté code
+General-purpose agent,Agent pouvant coder mais aussi agir sur le web ou des applications.,"Hermes, Goose, OpenClaw, OpenHuman, OpenWorker","Oui, au sens large",Pas exclusivement orienté code
 Meta-harness / workspace,Contrôle ou héberge plusieurs harnesses.,"Buzz, Agent Canvas, GitHub Agent HQ, CodexMate","Oui, couche supérieure",Ne remplace pas toujours le harness sous-jacent
 Orchestrator,"Découpe, planifie et coordonne plusieurs agents/exécutions.","Vibe Kanban, Gas Town, Oz","Oui, couche supérieure","Souvent worktrees, files et revues"
 Framework / SDK,Bibliothèque pour construire un agent ou un harness.,"LangGraph, Agents SDK, ADK, AutoGen",Adjacent,Pas nécessairement utilisable directement pour coder
