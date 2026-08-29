@@ -2,7 +2,7 @@
 
 Dataset as of **2026-08-29**: **173** systems (coding harnesses, agentic IDEs, cloud coding agents, orchestrators, frameworks, and research agents).
 
-The main file is [`inventaire.csv`](inventaire.csv). Each row is one tool, with its source type and category definition.
+The main file is [`inventaire.csv`](inventaire.csv). Each row is one tool, with its source type and category definition. You can also browse the table in [Airtable](https://airtable.com/appiub9AiVcxpuXAz/shrfiLQMtERFkwZN5).
 
 > Cells marked `Inconnu / non documenté` mean the fact was not confirmed. They do not mean the feature is missing. Check the primary source before buying or deploying.
 
