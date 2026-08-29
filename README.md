@@ -1,6 +1,6 @@
 # AI harness and agent inventory
 
-Dataset as of **2026-08-29**: **182** systems (coding harnesses, agentic IDEs, cloud coding agents, orchestrators, frameworks, research coding agents, and science agents).
+Dataset as of **2026-08-29**: **183** systems (coding harnesses, agentic IDEs, cloud coding agents, orchestrators, frameworks, research coding agents, and science agents).
 
 The main file is [`inventaire.csv`](inventaire.csv). Each row is one tool, with its source type and category definition. You can also browse the table in [Airtable](https://airtable.com/appiub9AiVcxpuXAz/shrfiLQMtERFkwZN5).
 
@@ -10,9 +10,9 @@ The main file is [`inventaire.csv`](inventaire.csv). Each row is one tool, with 
 
 | File | Contents |
 |---|---|
-| [`inventaire.csv`](inventaire.csv) | Main table, 182 rows × 33 columns |
+| [`inventaire.csv`](inventaire.csv) | Main table, 183 rows × 33 columns |
 | [`taxonomie.csv`](taxonomie.csv) | Category definitions |
-| [`sources.csv`](sources.csv) | 151 URLs, with primary / secondary type |
+| [`sources.csv`](sources.csv) | 152 URLs, with primary / secondary type |
 | [`dictionnaire.csv`](dictionnaire.csv) | Field dictionary and legend |
 
 Encoding: **UTF-8**, comma-separated, dates in **ISO 8601** (`YYYY-MM-DD`), LF line endings. Column names stay in French, as in the CSV.
@@ -53,7 +53,7 @@ Encoding: **UTF-8**, comma-separated, dates in **ISO 8601** (`YYYY-MM-DD`), LF l
 | Coding harness | 42 |
 | Framework / SDK | 26 |
 | Orchestrator | 24 |
-| Research coding agent | 22 |
+| Research coding agent | 23 |
 | Research science agent | 6 |
 | Meta-harness / workspace | 12 |
 | Agentic IDE | 10 |
@@ -68,13 +68,13 @@ Encoding: **UTF-8**, comma-separated, dates in **ISO 8601** (`YYYY-MM-DD`), LF l
 | Review / coding agent | 1 |
 | Review agent | 1 |
 
-**Access**: 82 open source · 53 proprietary · 22 open source / research · 17 open source / hybrid · 8 other.
+**Access**: 82 open source · 53 proprietary · 23 open source / research · 17 open source / hybrid · 8 other.
 
-**Confidence**: 96 high · 83 medium · 3 low.
+**Confidence**: 97 high · 83 medium · 3 low.
 
-**Cible**: 77 individual · 34 team · 29 infrastructure · 27 research · 14 enterprise · 1 business workflows.
+**Cible**: 77 individual · 34 team · 29 infrastructure · 28 research · 14 enterprise · 1 business workflows.
 
-**Métiers**: 136 Dev · 33 generalist · 6 Science · 7 with extra documented jobs (Data, Ops, Sec, OpenWorker’s set, or Paperclip’s business set).
+**Métiers**: 136 Dev · 34 generalist · 6 Science · 7 with extra documented jobs (Data, Ops, Sec, OpenWorker’s set, or Paperclip’s business set).
 
 ## Scope
 
