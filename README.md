@@ -1,6 +1,6 @@
 # AI harness and agent inventory
 
-Dataset as of **2026-08-29**: **173** systems (coding harnesses, agentic IDEs, cloud coding agents, orchestrators, frameworks, and research agents).
+Dataset as of **2026-08-29**: **174** systems (coding harnesses, agentic IDEs, cloud coding agents, orchestrators, frameworks, and research agents).
 
 The main file is [`inventaire.csv`](inventaire.csv). Each row is one tool, with its source type and category definition. You can also browse the table in [Airtable](https://airtable.com/appiub9AiVcxpuXAz/shrfiLQMtERFkwZN5).
 
@@ -10,9 +10,9 @@ The main file is [`inventaire.csv`](inventaire.csv). Each row is one tool, with 
 
 | File | Contents |
 |---|---|
-| [`inventaire.csv`](inventaire.csv) | Main table, 173 rows × 31 columns |
+| [`inventaire.csv`](inventaire.csv) | Main table, 174 rows × 31 columns |
 | [`taxonomie.csv`](taxonomie.csv) | Category definitions |
-| [`sources.csv`](sources.csv) | 140 URLs, with primary / secondary type |
+| [`sources.csv`](sources.csv) | 142 URLs, with primary / secondary type |
 | [`dictionnaire.csv`](dictionnaire.csv) | Field dictionary and legend |
 
 Encoding: **UTF-8**, comma-separated, dates in **ISO 8601** (`YYYY-MM-DD`), LF line endings. Column names stay in French, as in the CSV.
@@ -54,7 +54,7 @@ Encoding: **UTF-8**, comma-separated, dates in **ISO 8601** (`YYYY-MM-DD`), LF l
 | Research coding agent | 22 |
 | Meta-harness / workspace | 11 |
 | Agentic IDE | 10 |
-| General-purpose agent | 10 |
+| General-purpose agent | 11 |
 | Cloud coding agent | 8 |
 | App-building agent | 7 |
 | Coding agent | 4 |
@@ -65,9 +65,9 @@ Encoding: **UTF-8**, comma-separated, dates in **ISO 8601** (`YYYY-MM-DD`), LF l
 | Review / coding agent | 1 |
 | Review agent | 1 |
 
-**Access**: 76 open source · 52 proprietary · 22 open source / research · 16 open source / hybrid · 7 other.
+**Access**: 77 open source · 52 proprietary · 22 open source / research · 16 open source / hybrid · 7 other.
 
-**Confidence**: 87 high · 83 medium · 3 low.
+**Confidence**: 88 high · 83 medium · 3 low.
 
 ## Scope
 
