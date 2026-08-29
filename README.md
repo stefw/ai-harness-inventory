@@ -1,52 +1,52 @@
-# Inventaire des harnesses et agents IA
+# AI harness and agent inventory
 
-Jeu de données consolidé au **2026-08-29** : **173** systèmes (harnesses de codage, IDE agentiques, agents cloud, orchestrateurs, frameworks et agents de recherche).
+Dataset as of **2026-08-29**: **173** systems (coding harnesses, agentic IDEs, cloud coding agents, orchestrators, frameworks, and research agents).
 
-Le fichier principal est [`inventaire.csv`](inventaire.csv). Il regroupe la fiche de chaque outil, le type de source et la définition taxonomique de sa catégorie.
+The main file is [`inventaire.csv`](inventaire.csv). Each row is one tool, with its source type and category definition.
 
-> Les cellules `Inconnu / non documenté` signalent une information non confirmée. Elles ne signifient pas que la fonction est absente. Vérifiez la source principale avant un achat ou un déploiement.
+> Cells marked `Inconnu / non documenté` mean the fact was not confirmed. They do not mean the feature is missing. Check the primary source before buying or deploying.
 
-## Fichiers
+## Files
 
-| Fichier | Contenu |
+| File | Contents |
 |---|---|
-| [`inventaire.csv`](inventaire.csv) | Table unique, 173 lignes × 31 colonnes |
-| [`taxonomie.csv`](taxonomie.csv) | Définitions des catégories |
-| [`sources.csv`](sources.csv) | 133 URL utilisées, avec type (primaire / secondaire) |
-| [`dictionnaire.csv`](dictionnaire.csv) | Dictionnaire des champs et de la légende |
+| [`inventaire.csv`](inventaire.csv) | Main table, 173 rows × 31 columns |
+| [`taxonomie.csv`](taxonomie.csv) | Category definitions |
+| [`sources.csv`](sources.csv) | 133 URLs, with primary / secondary type |
+| [`dictionnaire.csv`](dictionnaire.csv) | Field dictionary and legend |
 
-Encodage : **UTF-8**, séparateur `,`, dates **ISO 8601** (`YYYY-MM-DD`), fin de ligne LF.
+Encoding: **UTF-8**, comma-separated, dates in **ISO 8601** (`YYYY-MM-DD`), LF line endings. Column names stay in French, as in the CSV.
 
-## Colonnes de `inventaire.csv`
+## Columns in `inventaire.csv`
 
-| Colonne | Rôle |
+| Column | Meaning |
 |---|---|
-| `id` | Identifiant stable (slug ASCII) |
-| `nom` | Nom du système |
-| `editeur` | Éditeur ou mainteneur |
-| `categorie` | Catégorie de l’inventaire |
-| `acces` | Open source, hybride, propriétaire… |
-| `licence` | Licence ou conditions documentées |
-| `maturite` | Actif, expérimental, archivé… |
+| `id` | Stable ASCII slug |
+| `nom` | System name |
+| `editeur` | Publisher or maintainer |
+| `categorie` | Inventory category |
+| `acces` | Open source, hybrid, proprietary… |
+| `licence` | Documented license or terms |
+| `maturite` | Active, experimental, archived… |
 | `surfaces` | CLI, IDE, web, cloud… |
-| `local` / `cloud` | Où ça s’exécute |
-| `politique_modeles` | Modèles supportés |
-| `terminal` `ide` `web` `computer_use` | Surfaces d’interaction |
-| `mcp` `acp` `skills` `sous_agents` | Protocoles et composition |
-| `memoire` `sandbox` `orchestration` | Mémoire, isolation, coordination |
-| `usage_principal` | Usage observé |
-| `source_principale` | URL de référence |
-| `type_source` | Primaire / dépôt ou secondaire / index |
-| `notes` | Remarque ponctuelle |
-| `confiance` | Élevée, moyenne ou faible |
-| `verifie_le` | Date de vérification |
-| `definition_categorie` `est_harness` `remarque_categorie` | Jointure depuis `taxonomie.csv` |
+| `local` / `cloud` | Where it runs |
+| `politique_modeles` | Supported models |
+| `terminal` `ide` `web` `computer_use` | Interaction surfaces |
+| `mcp` `acp` `skills` `sous_agents` | Protocols and composition |
+| `memoire` `sandbox` `orchestration` | Memory, isolation, coordination |
+| `usage_principal` | Main observed use |
+| `source_principale` | Reference URL |
+| `type_source` | Primary / repo or secondary / index |
+| `notes` | Occasional remark |
+| `confiance` | High, medium, or low |
+| `verifie_le` | Verification date |
+| `definition_categorie` `est_harness` `remarque_categorie` | Joined from `taxonomie.csv` |
 
-## Répartition
+## Breakdown
 
-**Catégories**
+**Categories**
 
-| Catégorie | n |
+| Category | n |
 |---|---|
 | Coding harness | 42 |
 | Framework / SDK | 26 |
@@ -65,57 +65,26 @@ Encodage : **UTF-8**, séparateur `,`, dates **ISO 8601** (`YYYY-MM-DD`), fin de
 | Review / coding agent | 1 |
 | Review agent | 1 |
 
-**Accès** : 76 open source · 52 propriétaires · 22 open source / recherche · 16 open source / hybride · 7 autres.
+**Access**: 76 open source · 52 proprietary · 22 open source / research · 16 open source / hybrid · 7 other.
 
-**Confiance** : 78 élevée · 83 moyenne · 12 faible.
+**Confidence**: 78 high · 83 medium · 12 low.
 
-## Périmètre
+## Scope
 
-Inclus : harnesses de codage, agents généralistes capables de coder, plateformes d’agents, orchestrateurs et frameworks adjacents.
+In scope: coding harnesses, general-purpose agents that can write code, agent platforms, orchestrators, and adjacent frameworks.
 
-Exclus : modèles seuls, simples autocomplétions sans boucle agentique, petits forks non identifiés et wrappers éphémères.
+Out of scope: models alone, plain autocomplete with no agent loop, unidentified small forks, and short-lived wrappers.
 
-Méthode : documentations et dépôts officiels en priorité ; listes communautaires pour le long tail. Les licences et fonctionnalités doivent être revérifiées avant un usage juridique.
+Method: official docs and repositories first; community lists for the long tail. Licenses and features should be rechecked before any legal use.
 
-## Sync Airtable
-
-La Sync API d’Airtable est réservée aux plans Business / Enterprise. Sur le **plan gratuit**, l’Action utilise l’[API REST](https://airtable.com/developers/web/api/update-multiple-records) : upsert par lots de 10, fusion sur le champ `id`, puis suppression des fiches absentes du CSV.
-
-Un sync = ~20 appels. Le gratuit autorise [1 000 appels / workspace / mois](https://support.airtable.com/docs/en/api).
-
-### 1. Créer la table
-
-Dans une base Airtable : **Add or import → CSV** et importe [`inventaire.csv`](inventaire.csv). Garde les noms de colonnes tels quels. Le champ `id` sert de clé.
-
-### 2. Token
-
-Crée un [personal access token](https://airtable.com/create/tokens) avec :
-
-- scopes `data.records:read` et `data.records:write`
-- accès à cette base
-
-L’ID de base est dans l’URL : `airtable.com/appXXXXXXXXXXXXXX/...`
-
-### 3. Secrets GitHub
-
-**Settings → Secrets and variables → Actions** :
-
-| Secret | Valeur |
-|---|---|
-| `AIRTABLE_PAT` | le personal access token |
-| `AIRTABLE_BASE_ID` | `app…` |
-| `AIRTABLE_TABLE` | nom ou ID de la table (`tbl…` de préférence) |
-
-L’Action ne part **que** si `inventaire.csv` change sur `main`. Un lancement manuel reste possible via **Actions → Sync Airtable → Run workflow**.
-
-## Utilisation
+## Usage
 
 ```bash
-# aperçu
+# preview
 head -n 2 inventaire.csv
 
 # Python
 python3 -c "import csv; rows=list(csv.DictReader(open('inventaire.csv', encoding='utf-8'))); print(len(rows), rows[0]['nom'])"
 ```
 
-Les licences listées sont celles des projets inventoriés, pas une licence de ce jeu de données. Ajoutez la vôtre avant publication publique si besoin.
+Licenses listed here belong to the inventoried projects, not to this dataset. Add your own dataset license if you need one.
