@@ -67,6 +67,43 @@ def record_fields(row: dict) -> dict:
     return {key: value for key, value in row.items() if value != ""}
 
 
+def find_table(base: str, table_ref: str) -> dict:
+    payload = paced("GET", f"https://api.airtable.com/v0/meta/bases/{base}/tables")
+    tables = payload.get("tables", [])
+    for table in tables:
+        if table.get("id") == table_ref or table.get("name") == table_ref:
+            return table
+    names = ", ".join(f"{t.get('name')} ({t.get('id')})" for t in tables) or "(aucune)"
+    print(f"Table introuvable : {table_ref}. Tables : {names}", file=sys.stderr)
+    sys.exit(1)
+
+
+def ensure_fields(base: str, table: dict, columns: list[str]) -> None:
+    existing = {field.get("name") for field in table.get("fields", [])}
+    missing = [name for name in columns if name not in existing]
+    if not missing:
+        return
+    table_id = table["id"]
+    print(f"Champs Airtable manquants : {', '.join(missing)}")
+    for name in missing:
+        try:
+            paced(
+                "POST",
+                f"https://api.airtable.com/v0/meta/bases/{base}/tables/{table_id}/fields",
+                {"name": name, "type": "singleLineText"},
+            )
+        except urllib.error.HTTPError as exc:
+            if exc.code in {401, 403}:
+                print(
+                    "Le token Airtable ne peut pas créer de champs "
+                    "(scope schema.bases:write requis), "
+                    f"ou crée-les à la main : {', '.join(missing)}",
+                    file=sys.stderr,
+                )
+            raise
+        print(f"Champ créé : {name}")
+
+
 def list_existing(api: str) -> list[dict]:
     records: list[dict] = []
     offset = None
@@ -89,6 +126,7 @@ def main() -> None:
     api = f"https://api.airtable.com/v0/{base}/{urllib.parse.quote(table, safe='')}"
 
     rows = load_csv(csv_path)
+    ensure_fields(base, find_table(base, table), list(rows[0].keys()))
     created = updated = deleted = 0
 
     for batch in chunks(rows, BATCH):

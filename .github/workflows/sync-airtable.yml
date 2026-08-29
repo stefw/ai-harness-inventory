@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - inventaire.csv
+      - .github/scripts/sync_airtable.py
   workflow_dispatch:
 
 jobs:
