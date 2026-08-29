@@ -6,6 +6,7 @@ from __future__ import annotations
 import csv
 import json
 import os
+import re
 import sys
 import time
 import urllib.error
@@ -16,6 +17,14 @@ from pathlib import Path
 BATCH = 10
 PAUSE = 0.25
 MERGE_FIELD = "id"
+UNKNOWN_FIELD = re.compile(r'Unknown field name: "([^"]+)"')
+
+
+class AirtableError(RuntimeError):
+    def __init__(self, status: int, payload: dict):
+        self.status = status
+        self.payload = payload
+        super().__init__(json.dumps(payload, ensure_ascii=False))
 
 
 def env(name: str) -> str:
@@ -37,8 +46,13 @@ def request(method: str, url: str, body: dict | None = None) -> dict:
             raw = resp.read().decode("utf-8")
             return json.loads(raw) if raw else {}
     except urllib.error.HTTPError as exc:
-        print(exc.read().decode("utf-8", errors="replace"), file=sys.stderr)
-        raise
+        raw = exc.read().decode("utf-8", errors="replace")
+        try:
+            payload = json.loads(raw) if raw else {}
+        except json.JSONDecodeError:
+            payload = {"error": {"message": raw}}
+        print(raw, file=sys.stderr)
+        raise AirtableError(exc.code, payload) from exc
 
 
 def paced(method: str, url: str, body: dict | None = None) -> dict:
@@ -63,45 +77,55 @@ def load_csv(path: Path) -> list[dict]:
     return rows
 
 
-def record_fields(row: dict) -> dict:
-    return {key: value for key, value in row.items() if value != ""}
+def unknown_field(error: AirtableError) -> str | None:
+    err = error.payload.get("error") or {}
+    if err.get("type") != "UNKNOWN_FIELD_NAME":
+        return None
+    match = UNKNOWN_FIELD.search(err.get("message") or "")
+    return match.group(1) if match else None
 
 
-def find_table(base: str, table_ref: str) -> dict:
-    payload = paced("GET", f"https://api.airtable.com/v0/meta/bases/{base}/tables")
-    tables = payload.get("tables", [])
-    for table in tables:
-        if table.get("id") == table_ref or table.get("name") == table_ref:
-            return table
-    names = ", ".join(f"{t.get('name')} ({t.get('id')})" for t in tables) or "(aucune)"
-    print(f"Table introuvable : {table_ref}. Tables : {names}", file=sys.stderr)
-    sys.exit(1)
+def record_fields(row: dict, skip: set[str]) -> dict:
+    return {
+        key: value
+        for key, value in row.items()
+        if value != "" and key not in skip
+    }
 
 
-def ensure_fields(base: str, table: dict, columns: list[str]) -> None:
-    existing = {field.get("name") for field in table.get("fields", [])}
-    missing = [name for name in columns if name not in existing]
-    if not missing:
-        return
-    table_id = table["id"]
-    print(f"Champs Airtable manquants : {', '.join(missing)}")
-    for name in missing:
+def upsert(api: str, rows: list[dict]) -> tuple[int, int, set[str]]:
+    skip: set[str] = set()
+    created = updated = 0
+    index = 0
+    batches = list(chunks(rows, BATCH))
+    while index < len(batches):
+        batch = batches[index]
         try:
-            paced(
-                "POST",
-                f"https://api.airtable.com/v0/meta/bases/{base}/tables/{table_id}/fields",
-                {"name": name, "type": "singleLineText"},
+            payload = paced(
+                "PATCH",
+                api,
+                {
+                    "performUpsert": {"fieldsToMergeOn": [MERGE_FIELD]},
+                    "typecast": True,
+                    "records": [
+                        {"fields": record_fields(row, skip)} for row in batch
+                    ],
+                },
             )
-        except urllib.error.HTTPError as exc:
-            if exc.code in {401, 403}:
-                print(
-                    "Le token Airtable ne peut pas créer de champs "
-                    "(scope schema.bases:write requis), "
-                    f"ou crée-les à la main : {', '.join(missing)}",
-                    file=sys.stderr,
-                )
-            raise
-        print(f"Champ créé : {name}")
+        except AirtableError as error:
+            field = unknown_field(error)
+            if not field:
+                raise
+            if field == MERGE_FIELD:
+                print(f"Le champ de fusion {MERGE_FIELD} est absent d'Airtable", file=sys.stderr)
+                sys.exit(1)
+            print(f"Champ Airtable absent, ignoré : {field}")
+            skip.add(field)
+            continue
+        created += len(payload.get("createdRecords", []))
+        updated += len(payload.get("updatedRecords", []))
+        index += 1
+    return created, updated, skip
 
 
 def list_existing(api: str) -> list[dict]:
@@ -126,21 +150,8 @@ def main() -> None:
     api = f"https://api.airtable.com/v0/{base}/{urllib.parse.quote(table, safe='')}"
 
     rows = load_csv(csv_path)
-    ensure_fields(base, find_table(base, table), list(rows[0].keys()))
-    created = updated = deleted = 0
-
-    for batch in chunks(rows, BATCH):
-        payload = paced(
-            "PATCH",
-            api,
-            {
-                "performUpsert": {"fieldsToMergeOn": [MERGE_FIELD]},
-                "typecast": True,
-                "records": [{"fields": record_fields(row)} for row in batch],
-            },
-        )
-        created += len(payload.get("createdRecords", []))
-        updated += len(payload.get("updatedRecords", []))
+    created, updated, skipped = upsert(api, rows)
+    deleted = 0
 
     csv_ids = {row[MERGE_FIELD] for row in rows}
     stale = [
@@ -157,6 +168,11 @@ def main() -> None:
         f"Sync OK : {len(rows)} lignes CSV, "
         f"{created} créées, {updated} mises à jour, {deleted} supprimées"
     )
+    if skipped:
+        print(
+            "Crée ces champs texte dans Airtable (noms exacts), puis relance la sync : "
+            + ", ".join(sorted(skipped))
+        )
 
 
 if __name__ == "__main__":
