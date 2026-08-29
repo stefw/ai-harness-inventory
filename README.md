@@ -12,7 +12,7 @@ The main file is [`inventaire.csv`](inventaire.csv). Each row is one tool, with 
 |---|---|
 | [`inventaire.csv`](inventaire.csv) | Main table, 173 rows × 31 columns |
 | [`taxonomie.csv`](taxonomie.csv) | Category definitions |
-| [`sources.csv`](sources.csv) | 133 URLs, with primary / secondary type |
+| [`sources.csv`](sources.csv) | 140 URLs, with primary / secondary type |
 | [`dictionnaire.csv`](dictionnaire.csv) | Field dictionary and legend |
 
 Encoding: **UTF-8**, comma-separated, dates in **ISO 8601** (`YYYY-MM-DD`), LF line endings. Column names stay in French, as in the CSV.
@@ -38,7 +38,7 @@ Encoding: **UTF-8**, comma-separated, dates in **ISO 8601** (`YYYY-MM-DD`), LF l
 | `source_principale` | Reference URL |
 | `type_source` | Primary / repo or secondary / index |
 | `notes` | Occasional remark |
-| `confiance` | High, medium, or low |
+| `confiance` | Reliability of the row, not of the product (`Élevée` / `Moyenne` / `Faible`) |
 | `verifie_le` | Verification date |
 | `definition_categorie` `est_harness` `remarque_categorie` | Joined from `taxonomie.csv` |
 
@@ -67,7 +67,7 @@ Encoding: **UTF-8**, comma-separated, dates in **ISO 8601** (`YYYY-MM-DD`), LF l
 
 **Access**: 76 open source · 52 proprietary · 22 open source / research · 16 open source / hybrid · 7 other.
 
-**Confidence**: 78 high · 83 medium · 12 low.
+**Confidence**: 87 high · 83 medium · 3 low.
 
 ## Scope
 
@@ -76,6 +76,10 @@ In scope: coding harnesses, general-purpose agents that can write code, agent pl
 Out of scope: models alone, plain autocomplete with no agent loop, unidentified small forks, and short-lived wrappers.
 
 Method: official docs and repositories first; community lists for the long tail. Licenses and features should be rechecked before any legal use.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). One pull request per tool, official source required, no guessed cells.
 
 ## Usage
 
@@ -89,6 +93,6 @@ python3 -c "import csv; rows=list(csv.DictReader(open('inventaire.csv', encoding
 
 ## License
 
-This dataset is licensed under [CC BY 4.0](LICENSE). You can reuse and adapt it, including commercially, as long as you give credit.
+This dataset is licensed under [CC BY 4.0](LICENSE). You can reuse and adapt it, including commercially, as long as you give credit. See [CITATION.cff](CITATION.cff) if you cite it.
 
 Project licenses listed in the CSV belong to those projects, not to this inventory.

@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: If you use this dataset, please cite it.
+type: dataset
+title: AI harness and agent inventory
+abstract: Curated inventory of coding harnesses, agentic IDEs, cloud coding agents, orchestrators, frameworks, and research agents.
+license: CC-BY-4.0
+repository-code: https://github.com/stefw/ai-harness-inventory
+url: https://airtable.com/appiub9AiVcxpuXAz/shrfiLQMtERFkwZN5
+date-released: '2026-08-29'
+authors:
+  - name: stefw
+    website: https://github.com/stefw
