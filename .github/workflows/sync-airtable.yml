@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - inventaire.csv
+      - .github/scripts/sync_airtable.py
       - .github/workflows/sync-airtable.yml
   workflow_dispatch:
 
@@ -15,20 +16,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Envoyer inventaire.csv vers Airtable Sync API
+      - name: Upsert inventaire.csv vers Airtable
         env:
           AIRTABLE_PAT: ${{ secrets.AIRTABLE_PAT }}
-          AIRTABLE_SYNC_URL: ${{ secrets.AIRTABLE_SYNC_URL }}
-        run: |
-          set -euo pipefail
-          if [ -z "${AIRTABLE_PAT:-}" ] || [ -z "${AIRTABLE_SYNC_URL:-}" ]; then
-            echo "Secrets manquants : AIRTABLE_PAT et AIRTABLE_SYNC_URL"
-            exit 1
-          fi
-          bytes=$(wc -c < inventaire.csv)
-          echo "Envoi de inventaire.csv (${bytes} octets)"
-          curl -fsS -X POST "$AIRTABLE_SYNC_URL" \
-            -H "Authorization: Bearer ${AIRTABLE_PAT}" \
-            -H "Content-Type: text/csv" \
-            --data-binary @inventaire.csv \
-            -w "\nHTTP %{http_code}\n"
+          AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
+          AIRTABLE_TABLE: ${{ secrets.AIRTABLE_TABLE }}
+        run: python3 .github/scripts/sync_airtable.py

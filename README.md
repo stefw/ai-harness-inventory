@@ -79,41 +79,34 @@ Méthode : documentations et dépôts officiels en priorité ; listes communauta
 
 ## Sync Airtable
 
-À chaque push de `inventaire.csv` sur `main`, une [GitHub Action](.github/workflows/sync-airtable.yml) envoie le CSV brut vers la [Sync API](https://airtable.com/developers/web/api/post-sync-api-endpoint) d’Airtable. La table se met à jour automatiquement (173 lignes, ~84 Ko — sous les plafonds 10 000 / 2 Mo).
+La Sync API d’Airtable est réservée aux plans Business / Enterprise. Sur le **plan gratuit**, l’Action utilise l’[API REST](https://airtable.com/developers/web/api/update-multiple-records) : upsert par lots de 10, fusion sur le champ `id`, puis suppression des fiches absentes du CSV.
 
-Nécessite un plan **Business** ou **Enterprise Scale**, et un rôle Creator sur la base. Voir le [guide Sync API](https://support.airtable.com/docs/airtable-sync-integration-sync-api).
+Un sync = ~20 appels. Le gratuit autorise [1 000 appels / workspace / mois](https://support.airtable.com/docs/en/api).
 
-### 1. Token Airtable
+### 1. Créer la table
+
+Dans une base Airtable : **Add or import → CSV** et importe [`inventaire.csv`](inventaire.csv). Garde les noms de colonnes tels quels. Le champ `id` sert de clé.
+
+### 2. Token
 
 Crée un [personal access token](https://airtable.com/create/tokens) avec :
 
-- scopes `data.records:write` et `schema.bases:write`
-- accès à la base cible
+- scopes `data.records:read` et `data.records:write`
+- accès à cette base
 
-### 2. Table synchronisée
-
-Dans la base : **+ Add or import** → **more sources** → **Sync API**. Airtable affiche un endpoint du type :
-
-`https://api.airtable.com/v0/appXXX/tblXXX/sync/syncXXX`
-
-Pendant l’assistant (« Waiting to receive API request… »), envoie une première requête avec ce token, puis :
-
-- champs : **All fields**
-- clé primaire : **`id`**
-- types utiles : `source_principale` → URL, `verifie_le` → Date, `notes` / `definition_categorie` / `usage_principal` → Long text, le reste en Single line text
-- mise à jour : automatique à chaque requête
-- suppression : records absents du dernier CSV
+L’ID de base est dans l’URL : `airtable.com/appXXXXXXXXXXXXXX/...`
 
 ### 3. Secrets GitHub
 
-Dans le dépôt : **Settings → Secrets and variables → Actions**, ajoute :
+**Settings → Secrets and variables → Actions** :
 
 | Secret | Valeur |
 |---|---|
 | `AIRTABLE_PAT` | le personal access token |
-| `AIRTABLE_SYNC_URL` | l’URL complète copiée dans Airtable |
+| `AIRTABLE_BASE_ID` | `app…` |
+| `AIRTABLE_TABLE` | nom ou ID de la table (`tbl…` de préférence) |
 
-Ensuite **Actions → Sync Airtable → Run workflow** pour le premier envoi, ou pousse une modification de `inventaire.csv`.
+Puis **Actions → Sync Airtable → Run workflow**. Les prochains push de `inventaire.csv` mettront la table à jour.
 
 ## Utilisation
 
