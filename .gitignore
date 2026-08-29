@@ -4,3 +4,6 @@
 ~$*.xlsx
 
 __pycache__/
+
+# Brouillons locaux
+linkedin.md
