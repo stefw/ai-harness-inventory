@@ -106,7 +106,7 @@ L’ID de base est dans l’URL : `airtable.com/appXXXXXXXXXXXXXX/...`
 | `AIRTABLE_BASE_ID` | `app…` |
 | `AIRTABLE_TABLE` | nom ou ID de la table (`tbl…` de préférence) |
 
-Puis **Actions → Sync Airtable → Run workflow**. Les prochains push de `inventaire.csv` mettront la table à jour.
+L’Action ne part **que** si `inventaire.csv` change sur `main`. Un lancement manuel reste possible via **Actions → Sync Airtable → Run workflow**.
 
 ## Utilisation
 
