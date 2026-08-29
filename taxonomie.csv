@@ -1,0 +1,20 @@
+niveau,definition,exemples,est_harness,remarque
+Modèle,Le moteur d'inférence; il génère les décisions ou le texte.,"Claude, GPT/Codex, Grok, DeepSeek, Gemini, Qwen",Non,Peut être ouvert ou propriétaire
+Coding harness,Boucle modèle-outils-contexte-permissions destinée au code.,"Claude Code, Codex CLI, OpenCode, Cursor Agent",Oui,Catégorie principale de l'inventaire
+Agent runtime,"Infrastructure programmable pour composer outils, mémoire et boucles.","DeepSeek Harness, OpenHands, OpenHarness",Oui,Peut aussi livrer un agent prêt à l'emploi
+Agentic IDE,Éditeur intégrant un harness et des outils IDE.,"Cursor, Kiro, TRAE, Windsurf",Oui,Le harness peut être invisible ou propriétaire
+Cloud coding agent,"Agent exécuté en VM/conteneur distant, souvent asynchrone.","Devin, Jules, Codex Cloud, Copilot Cloud Agent",Oui,Délégation et PR
+General-purpose agent,Agent pouvant coder mais aussi agir sur le web ou des applications.,"Hermes, Grok Bot, Goose, OpenClaw","Oui, au sens large",Pas exclusivement orienté code
+Meta-harness / workspace,Contrôle ou héberge plusieurs harnesses.,"Buzz, Agent Canvas, GitHub Agent HQ","Oui, couche supérieure",Ne remplace pas toujours le harness sous-jacent
+Orchestrator,"Découpe, planifie et coordonne plusieurs agents/exécutions.","Vibe Kanban, Gas Town, Oz","Oui, couche supérieure","Souvent worktrees, files et revues"
+Framework / SDK,Bibliothèque pour construire un agent ou un harness.,"LangGraph, Agents SDK, ADK, AutoGen",Adjacent,Pas nécessairement utilisable directement pour coder
+Research coding agent,Prototype ou agent conçu pour travaux/benchmarks SWE.,"SWE-agent, Agentless, AutoCodeRover","Oui, recherche",Maturité production variable
+App-building agent,Agent qui génère ou itère une application complète à partir d'une intention.,"v0, Lovable, Bolt, Replit Agent",Oui,Souvent cloud et produit fermé
+Coding agent,Agent de codage commercial sans surface CLI/IDE clairement isolée.,"IBM Bob, Firebender, Pochi, Zencoder",Oui,Proche d'un coding harness; libellé source conservé
+Review agent,Agent centré sur la revue de code et les commentaires de pull request.,CodeRabbit,Oui,Peut s'intégrer au SCM sans boucle de développement complète
+Review / coding agent,Agent qui combine revue de code et assistance au développement.,Qodo Agent / Qodo Merge,Oui,À cheval entre revue et coding harness
+Agent platform,Plateforme produit qui embarque plusieurs agents dans un workflow métier.,GitLab Duo Agent Platform,"Oui, couche supérieure",Proche d'un meta-harness; ancré dans une forge ou une suite
+Agent bridge,Adaptateur qui relie un workspace ou un protocole à d'autres agents.,buzz-acp,Adjacent,Ne remplace pas le harness sous-jacent
+Autonomous loop,Boucle autonome qui relance un agent jusqu'à un critère d'arrêt.,"Ralph Harness, wreckit",Oui,Souvent une convention ou un runner autour d'un harness existant
+Evaluation harness,"Runner qui standardise environnement, budget et scoring.","SWE-bench harness, Terminal-Bench, Inspect AI",Non: évalue,À ne pas confondre avec l'agent
+Protocole / convention,Contrat d'intégration ou fichier d'instructions.,"MCP, ACP, A2A, Skills, AGENTS.md",Non,Utilisé par les harnesses

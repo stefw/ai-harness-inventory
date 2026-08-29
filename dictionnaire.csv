@@ -1,0 +1,44 @@
+champ,definition
+id,Identifiant stable dérivé du nom (slug ASCII).
+nom,"Nom du produit, projet ou système."
+editeur,"Éditeur, organisation ou mainteneur."
+categorie,Catégorie de l’inventaire. Voir taxonomie.csv.
+acces,Régime d’accès au code / produit.
+licence,Licence ou conditions d’usage telles que documentées. À revérifier avant usage juridique.
+maturite,"Statut du projet (actif, expérimental, archivé, etc.)."
+surfaces,"Interfaces d’usage observées (CLI, IDE, web, cloud…)."
+local,Exécution possible en local.
+cloud,Exécution ou backend cloud.
+politique_modeles,Modèles supportés ou politique d’accès aux modèles.
+terminal,Usage / contrôle via terminal.
+ide,Intégration IDE.
+web,Interface ou capacités web.
+computer_use,Contrôle d’ordinateur / navigateur / bureau.
+mcp,Support Model Context Protocol.
+acp,Support Agent Client Protocol.
+skills,"Compétences, skills, modes ou conventions d’instructions."
+sous_agents,Délégation à des sous-agents.
+memoire,"Mémoire, sessions ou persistance de contexte."
+sandbox,"Isolation, permissions ou environnement d’exécution."
+orchestration,Coordination de plusieurs agents ou exécutions.
+usage_principal,Usage principal observé.
+source_principale,URL principale utilisée pour documenter l’entrée.
+type_source,"Classification de la source (primaire / secondaire), jointe depuis sources.csv."
+notes,"Remarque ponctuelle (transition, archive, distinction de produit…)."
+confiance,Niveau de confiance dans la fiche.
+verifie_le,Date de vérification au format ISO 8601 (YYYY-MM-DD).
+definition_categorie,"Définition de la catégorie, jointe depuis taxonomie.csv. Vide si la catégorie n’y figure pas."
+est_harness,La catégorie décrit-elle un harness ? Joint depuis taxonomie.csv.
+remarque_categorie,"Remarque taxonomique, jointe depuis taxonomie.csv."
+Accès — Open source,Code publié sous licence ouverte identifiée.
+Accès — Open source / hybride,"Composant principal ouvert, service ou fonctions supplémentaires propriétaires."
+Accès — Source disponible,Code consultable mais licence non OSI ou restrictions possibles.
+Accès — Propriétaire,Pas de code complet publiquement réutilisable.
+Confiance — Élevée,Source officielle ou dépôt principal vérifié.
+Confiance — Moyenne,"Source officielle partielle, index reconnu ou statut susceptible d'évoluer."
+Confiance — Faible,Long tail communautaire ou informations insuffisamment consolidées.
+Inconnu / non documenté,Aucune confirmation trouvée; ne signifie pas 'Non'.
+Périmètre,"Harnesses de codage, agents généralistes capables de coder, plateformes d'agents, orchestrateurs et frameworks adjacents."
+Exclusions,"Modèles seuls, simples autocomplétions sans boucle agentique, petits forks non identifiés et wrappers éphémères."
+Méthode,Priorité aux documentations et dépôts officiels; listes communautaires pour le long tail. Les licences et fonctionnalités doivent être revérifiées avant usage juridique ou achat.
+Date de référence,2026-08-29

@@ -1,0 +1,4 @@
+# Classeur source local
+*.xlsx
+*.xls
+~$*.xlsx
