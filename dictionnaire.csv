@@ -3,6 +3,8 @@ id,Identifiant stable dérivé du nom (slug ASCII).
 nom,"Nom du produit, projet ou système."
 editeur,"Éditeur, organisation ou mainteneur."
 categorie,Catégorie de l’inventaire. Voir taxonomie.csv.
+cible,"Contexte de déploiement ou d’usage : Individuel, Équipe, Entreprise, Workflows métier, Infrastructure, Recherche. Inconnu / non documenté si non confirmé."
+metiers,"Métiers visés, séparés par · : Dev, Data, Ops, Sec, Com, Mkt, RH, Support, Sales, Finance, Science, Généraliste. Un métier hors Dev n’est inscrit que s’il est dit dans la source officielle."
 acces,Régime d’accès au code / produit.
 licence,Licence ou conditions d’usage telles que documentées. À revérifier avant usage juridique.
 maturite,"Statut du projet (actif, expérimental, archivé, etc.)."
@@ -37,8 +39,26 @@ Accès — Propriétaire,Pas de code complet publiquement réutilisable.
 Confiance — Élevée,Source officielle ou dépôt principal vérifié.
 Confiance — Moyenne,"Source officielle partielle, index reconnu ou statut susceptible d'évoluer."
 Confiance — Faible,Long tail communautaire ou informations insuffisamment consolidées.
+Cible — Individuel,Usage solo / local, sans offre orga documentée.
+Cible — Équipe,Produit d’équipe ou cloud, sans suite entreprise documentée.
+Cible — Entreprise,Offre orga documentée (forge, SSO/admin, DevOps entreprise, vendeur IT).
+Cible — Workflows métier,Agentification de process d’entreprise (orga, tickets, budgets, métiers hors seul repo).
+Cible — Infrastructure,SDK ou runtime pour construire des agents, pas un outil métier clé en main.
+Cible — Recherche,Prototype ou banc d’essai (SWE, science) / papier.
+Métiers — Dev,Produit officiellement destiné au développement logiciel.
+Métiers — Data,Produit officiellement destiné aux données / RAG / analytics (en plus ou à la place du Dev).
+Métiers — Ops,Produit officiellement destiné aux opérations / DevOps.
+Métiers — Sec,Produit officiellement destiné à la sécurité (ex. DevSecOps).
+Métiers — Com,Produit officiellement destiné à la communication interne / contenu.
+Métiers — Mkt,Produit officiellement destiné au marketing.
+Métiers — RH,Produit officiellement destiné aux ressources humaines.
+Métiers — Support,Produit officiellement destiné au support / tickets.
+Métiers — Sales,Produit officiellement destiné aux ventes.
+Métiers — Finance,Produit officiellement destiné à la finance.
+Métiers — Science,Produit officiellement destiné à la recherche scientifique (labo, analyses, hypothèses, manuscrits).
+Métiers — Généraliste,Pas un métier unique : agent personnel, framework d’agents, ou automatisations transverses.
 Inconnu / non documenté,Aucune confirmation trouvée; ne signifie pas 'Non'.
-Périmètre,"Harnesses de codage, agents généralistes capables de coder, plateformes d'agents, orchestrateurs et frameworks adjacents."
+Périmètre,"Harnesses de codage, agents généralistes capables de coder, agents scientifiques, plateformes d'agents, orchestrateurs et frameworks adjacents."
 Exclusions,"Modèles seuls, simples autocomplétions sans boucle agentique, petits forks non identifiés et wrappers éphémères."
 Méthode,Priorité aux documentations et dépôts officiels; listes communautaires pour le long tail. Les licences et fonctionnalités doivent être revérifiées avant usage juridique ou achat.
 Date de référence,2026-08-29

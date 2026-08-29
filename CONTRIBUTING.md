@@ -14,7 +14,9 @@ Rules:
 4. Keep `id` stable. Only change it if the project itself was renamed.
 5. Use `Inconnu / non documenté` when a feature is not confirmed. That is not the same as `Non`.
 6. Set `confiance` to `Élevée` only if the official source was checked. Use `Moyenne` for a partial official source. Use `Faible` only as a last resort.
-7. Do not guess `licence`, `mcp`, `acp`, or similar fields. Leave them unknown rather than approximating.
+7. Do not guess `licence`, `mcp`, `acp`, `cible`, or `metiers`. Leave them unknown rather than approximating.
+8. `cible` is one of: Individuel, Équipe, Entreprise, Workflows métier, Infrastructure, Recherche.
+9. `metiers` uses only: Dev, Data, Ops, Sec, Com, Mkt, RH, Support, Sales, Finance, Science, Généraliste. Do not add Com / Mkt / RH / Science unless the official docs say so. A coding harness is `Dev`, not an implied HR or science tool.
 
 If the category is new, add it to `taxonomie.csv` with a short definition.
 

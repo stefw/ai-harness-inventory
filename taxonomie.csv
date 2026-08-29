@@ -9,6 +9,7 @@ Meta-harness / workspace,Contrôle ou héberge plusieurs harnesses.,"Buzz, Agent
 Orchestrator,"Découpe, planifie et coordonne plusieurs agents/exécutions.","Vibe Kanban, Gas Town, Oz","Oui, couche supérieure","Souvent worktrees, files et revues"
 Framework / SDK,Bibliothèque pour construire un agent ou un harness.,"LangGraph, Agents SDK, ADK, AutoGen",Adjacent,Pas nécessairement utilisable directement pour coder
 Research coding agent,Prototype ou agent conçu pour travaux/benchmarks SWE.,"SWE-agent, Agentless, AutoCodeRover","Oui, recherche",Maturité production variable
+Research science agent,"Agent dont la boucle vise le travail scientifique (hypothèses, analyses, expériences, manuscrits), pas le développement logiciel.","Claude Science, The AI Scientist-v2, freephdlabor, Robin","Oui, science",Distinct des research coding agents (SWE-bench).
 App-building agent,Agent qui génère ou itère une application complète à partir d'une intention.,"v0, Lovable, Bolt, Replit Agent",Oui,Souvent cloud et produit fermé
 Coding agent,Agent de codage commercial sans surface CLI/IDE clairement isolée.,"IBM Bob, Firebender, Pochi, Zencoder",Oui,Proche d'un coding harness; libellé source conservé
 Review agent,Agent centré sur la revue de code et les commentaires de pull request.,CodeRabbit,Oui,Peut s'intégrer au SCM sans boucle de développement complète
