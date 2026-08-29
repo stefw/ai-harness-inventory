@@ -77,6 +77,44 @@ Exclus : modèles seuls, simples autocomplétions sans boucle agentique, petits 
 
 Méthode : documentations et dépôts officiels en priorité ; listes communautaires pour le long tail. Les licences et fonctionnalités doivent être revérifiées avant un usage juridique.
 
+## Sync Airtable
+
+À chaque push de `inventaire.csv` sur `main`, une [GitHub Action](.github/workflows/sync-airtable.yml) envoie le CSV brut vers la [Sync API](https://airtable.com/developers/web/api/post-sync-api-endpoint) d’Airtable. La table se met à jour automatiquement (173 lignes, ~84 Ko — sous les plafonds 10 000 / 2 Mo).
+
+Nécessite un plan **Business** ou **Enterprise Scale**, et un rôle Creator sur la base. Voir le [guide Sync API](https://support.airtable.com/docs/airtable-sync-integration-sync-api).
+
+### 1. Token Airtable
+
+Crée un [personal access token](https://airtable.com/create/tokens) avec :
+
+- scopes `data.records:write` et `schema.bases:write`
+- accès à la base cible
+
+### 2. Table synchronisée
+
+Dans la base : **+ Add or import** → **more sources** → **Sync API**. Airtable affiche un endpoint du type :
+
+`https://api.airtable.com/v0/appXXX/tblXXX/sync/syncXXX`
+
+Pendant l’assistant (« Waiting to receive API request… »), envoie une première requête avec ce token, puis :
+
+- champs : **All fields**
+- clé primaire : **`id`**
+- types utiles : `source_principale` → URL, `verifie_le` → Date, `notes` / `definition_categorie` / `usage_principal` → Long text, le reste en Single line text
+- mise à jour : automatique à chaque requête
+- suppression : records absents du dernier CSV
+
+### 3. Secrets GitHub
+
+Dans le dépôt : **Settings → Secrets and variables → Actions**, ajoute :
+
+| Secret | Valeur |
+|---|---|
+| `AIRTABLE_PAT` | le personal access token |
+| `AIRTABLE_SYNC_URL` | l’URL complète copiée dans Airtable |
+
+Ensuite **Actions → Sync Airtable → Run workflow** pour le premier envoi, ou pousse une modification de `inventaire.csv`.
+
 ## Utilisation
 
 ```bash
